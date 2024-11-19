@@ -37,7 +37,7 @@ boost_wf <- workflow() %>%
 tuning_grid <- grid_regular(tree_depth(), trees(), learn_rate(), levels = 5)
 
 # Split data for CV
-folds <- vfold_cv(train_data, v = 10, repeats = 1)
+folds <- vfold_cv(store_item, v = 10, repeats = 1)
 
 # Run the CV
 cv_results_best_tuned <- boost_wf %>% 
