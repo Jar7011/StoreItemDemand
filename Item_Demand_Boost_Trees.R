@@ -14,7 +14,7 @@ store_item <- train_data %>%
   filter(store == 1, item == 1)
 
 # Create recipe
-boost_recipe <- recipe(sales ~ ., data = train_data) %>% 
+boost_recipe <- recipe(sales ~ ., data = store_item) %>% 
   step_date(date, features = c('dow', 'month', 'doy')) %>% 
   step_range(date_doy, min = 0, max = pi) %>% 
   step_mutate(sinDOY=sin(date_doy), cosDOY=cos(date_doy)) %>% 
