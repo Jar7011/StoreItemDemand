@@ -24,7 +24,7 @@ boost_recipe <- recipe(sales ~ ., data = train_data) %>%
 boost_model <- boost_tree(tree_depth = tune(),
                           trees = tune(),
                           learn_rate = tune()) %>% 
-  set_engine('lightgbm') %>% 
+  set_engine('xgboost') %>% 
   set_mode('regression')
 
 # Create workflow
