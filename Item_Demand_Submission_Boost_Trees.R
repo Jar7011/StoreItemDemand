@@ -16,12 +16,12 @@ n_stores <- max(train_data$store)
 n_items <- max(train_data$item)
 
 # Create recipe
-boost_recipe <- recipe(sales ~ ., data = train_data) %>% 
-  step_date(date, features = c('dow', 'month', 'doy', 'year', 'decimal')) %>% 
-  step_range(date_doy, min = 0, max = pi) %>% 
-  step_mutate(sinDOY=sin(date_doy), cosDOY=cos(date_doy)) %>% 
-  step_rm(c('store', 'item', 'date')) %>%
-  step_lencode_mixed(all_nominal_predictors(), outcome = vars(sales)) %>% 
+boost_recipe <- recipe(sales~., data=train_data) %>%
+  step_date(date, features=c("dow", "month", "decimal", "doy", "year")) %>%
+  step_range(date_doy, min=0, max=pi) %>%
+  step_mutate(sinDOY=sin(date_doy), cosDOY=cos(date_doy)) %>%
+  step_lencode_mixed(all_nominal_predictors(), outcome=vars(sales)) %>%
+  step_rm(date, item, store) %>%
   step_normalize(all_numeric_predictors())
 
 # Create model 
